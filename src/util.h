@@ -5,9 +5,6 @@
 * \date 16/02/2022
 * \brief 
 * \remarks None
-* 
-* 
-* 
 */
 
 #ifndef UTIL_H
@@ -16,6 +13,13 @@
 /*! Importation of librairies*/
 #include <iostream>
 #include <curl/curl.h>
+#include <termios.h>
+#include <unistd.h>
+
+#define SIZE 100
+
+void getPassword(std::string& password);
+
 
 /**
  * @brief Function to write response content to string
