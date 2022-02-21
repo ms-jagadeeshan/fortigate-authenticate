@@ -15,7 +15,7 @@ cd fortigate-authenticate/src
 g++ fauth.cpp util.cpp -o ../bin/fauth -lcurl
 ```
 This will clone and compile the program.
-Binary program is stored as bin/fauth
+Binary program is stored under `fortigate-authenticate/bin` folder
 
 ## Usage
 ```sh
