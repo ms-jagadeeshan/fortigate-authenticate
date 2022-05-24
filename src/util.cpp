@@ -5,7 +5,7 @@ void getPassword(std::string &password)
     static struct termios old_terminal;
     static struct termios new_terminal;
 
-    //get settings of the actual terminal
+    // get settings of the actual terminal
     tcgetattr(STDIN_FILENO, &old_terminal);
 
     // do not echo the characters
@@ -41,6 +41,8 @@ void curlHandler::authenticate(const char *url, std::string &response_string, co
         curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, writeFunction);
         curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &response_string);
         curl_easy_setopt(curl_handle, CURLOPT_HEADERDATA, &(response_header));
+        curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+        curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, 0L);
         curl_easy_setopt(curl_handle, CURLOPT_TCP_KEEPALIVE, 300L);
         curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36");
 
@@ -48,6 +50,7 @@ void curlHandler::authenticate(const char *url, std::string &response_string, co
         if (res != CURLE_OK)
         {
             std::cerr << "error: " << curl_easy_strerror(res) << "\n";
+            return;
         }
 
         // printing response header
