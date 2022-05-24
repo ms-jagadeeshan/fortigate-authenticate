@@ -49,18 +49,18 @@ void curlHandler::authenticate(const char *url, std::string &response_string, co
         res = curl_easy_perform(curl_handle);
         if (res != CURLE_OK)
         {
-            std::cerr << "error: " << curl_easy_strerror(res) << "\n";
+            std::cerr << "\nerror: " << curl_easy_strerror(res) << "\n";
             return;
         }
 
         // printing response header
-        std::cout << response_header;
+        //std::cout << response_header;
 
         // Searching for magic string
         int pos = response_string.rfind("magic");
         if (pos == 0)
         {
-            std::cerr << "Magic string not found error";
+            std::cerr << "\nMagic string not found error\n";
             return;
         }
 
@@ -93,12 +93,17 @@ void curlHandler::authenticate(const char *url, std::string &response_string, co
         res = curl_easy_perform(curl_handle);
 
         // printing response header
-        std::cout << response_header;
+        //std::cout << response_header;
 
         if (res != CURLE_OK)
         {
-            std::cerr << "error: " << curl_easy_strerror(res) << "\n";
+            std::cerr << "\nerror: " << curl_easy_strerror(res) << "\n";
+	    return;
         }
+	
+	//Success message
+	std::cout<<"\nSuccessfully authenticated!\n";
+
         curl_easy_reset(this->curl_handle);
     }
 }
